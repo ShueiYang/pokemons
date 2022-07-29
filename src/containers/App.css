@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #44A08D , #093637); 
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 50%;
+  align-items: center;
+}
+.logo img {
+  max-width: 40%;
+  height: auto;
+}
+
+@font-face {
+  font-family: 'Pokemon Font';
+  src: url('Pokemon Hollow.ttf');
+}
+.loadfont {
+  font-family: 'Pokemon Font';
+  display: flex;
+  text-align: center;
+  color: #ffcc03;
+  font-size: 2rem;
+}
+
+.Pokemonfont {
+  font-family: 'Pokemon Font';
+  color: #ffcc03;
+  font-size: 2.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  font-weight: bold;
+}
+
+h2, h3 {
+  margin: 0.2rem;
+}
+
+.container {
+  width: 95% ;
+  margin: auto;
+  padding-top: 1rem;
+  display: flex;
+}
+
+.right-content {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+  gap: 1.5rem;
+  overflow: auto;
+  height: 800px;
+}
+
+.left-content {
+  flex-basis: 25%;
+  text-align: center;
+  color: black;
+  top: 100px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.left-content img {
+  margin: 2rem;
+  max-width:85%;
+  height:auto;
+  
+}
+.left-content h1 {
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.abilities {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.abilities .group {
+  color: #093637;
+  padding: 0.5rem ;
+  font-size: 12px;
+  border-radius: 8px;
+}
+.base-stat {
+  margin-top: 2rem;
+}
+.btn-group {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem;
+}
+
+button {
+  outline: none;
+  border: none;
+  width: 150px;
+  padding: 0.3rem 0;
+  margin: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: burlywood;
+  border-radius: 8px;
+  cursor: pointer;
+}
+  
+.card-container {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: 24rem;
+  border-radius: 1rem ;
+  box-shadow: 4px 6px 6px rgba(0,0,0,0.5);
+  padding: 1.5rem;
+  align-items: center;
+  justify-content: space-around;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 1s;
+}
+
+.card-container:hover {
+  transform: scale(1.1);
+}
+
+.card-container img {
+    max-width:75%;
+    height:auto;
+}
+
+small {
+  font-size: medium;
+}
