@@ -18,14 +18,18 @@ const SearchBar = ({placeholder, getPokemon}) => {
 
     useEffect(() => { 
         const getData = async () => {
-            const resp = await fetchData()
-            const data = await resp.json()
-            setDataName(data.results)
-            }    
-            getData();
+            try{
+                const resp = await fetchData()
+                const data = await resp.json()
+                setDataName(data.results)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        getData();
     }, [])
-    
-   
+            
+       
     const handleChange = event => {
         setSearchWord(event.target.value)
         setOpen(true) 

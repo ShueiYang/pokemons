@@ -71,7 +71,7 @@ function App() {
   const [searchUrl, setSearchUrl] = useState(null)
   const [errorSearch, setErrorSearch] = useState(null)
   
-  const searchPokemon = async (keyword) => {
+  const searchPokemon = (keyword) => {
     if (!keyword) {
       setSearchUrl(null)
       return setErrorSearch(null);
@@ -92,7 +92,7 @@ function App() {
         setErrorSearch(`Pokemon not found ...`)
         setSearchUrl(null)
       }
-    },1000 );
+    },500);
   }
   
   //The function below are set to display different pages as only 25 pokemons 
