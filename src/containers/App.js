@@ -3,11 +3,12 @@ import PokemonList from "../components/PokemonList";
 import Pokeinfo from "../components/Pokeinfo";
 import Pagination from "../components/Pagination";
 import SearchBar from "../components/SearchBar";
-import Mainlogo from "./pokemon-logo.png"
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CircularProgress from '@mui/material/CircularProgress';
 import "./App.css"
 import { fetchPokemon } from "../services/SearchPokemon";
+
 
 
 function App() {
@@ -118,21 +119,18 @@ function App() {
   
   
 if (loading)
-  return <div className="logo">
-          <img src={Mainlogo} alt="logo" />
-          <h2 className="loadfont">{`Loading ... A moment plz ...`}</h2>
-        </div>
+  return (
+    <Header message={`Loading ... A moment plz ...`} />
+  )    
+       
 else if (error) 
-  return <div className="logo">
-          <img src={Mainlogo} alt="logo" />
-          <h2 className="loadfont">{`Ooooops something went wrong :(  ${error}`}</h2>
-        </div>   
+  return (
+    <Header message={`Ooooops something went wrong :(  ${error}`} />
+  )
   
   return (
     <div> 
-      <div className="logo">
-        <img src={Mainlogo} alt="logo" />
-      </div>
+      <Header />
       <div>
         <SearchBar placeholder="Search by name..."
                    getPokemon= {searchPokemon}/>
@@ -175,7 +173,7 @@ else if (error)
   );
 }
 
-export default App;    
+export default App;   
         
         
 
