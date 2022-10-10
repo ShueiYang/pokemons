@@ -34,18 +34,17 @@ const SearchBar = ({placeholder, getPokemon}) => {
         setSearchWord(event.target.value)
         setOpen(true) 
     }
-    const handleSubmit = event => {
-        getPokemon(searchWord)
-    }
+
     const handleKeypress = event => {
         if(event.key === 'Enter') {
-            handleSubmit()
+            getPokemon(searchWord)
             setOpen(false);
         }
     }
-    const onSearch = searchTerm => {
-        setSearchWord(searchTerm)
-        getPokemon(searchTerm)
+    
+    const handleSearch = dropdownListName => {
+        setSearchWord(dropdownListName)
+        getPokemon(dropdownListName)
         setOpen(false)
     }
 
@@ -73,13 +72,16 @@ const SearchBar = ({placeholder, getPokemon}) => {
                         value = {searchWord}
                         onChange= {handleChange}
                         onKeyPress={handleKeypress}
-                    />    
-                    
+                    />
+                
+                {searchWord.length !== 0 ?
                     <div className="searchIcon" >
-                        {searchWord.length === 0 ? <SearchIcon fontSize="large"/>
-                         : <CloseIcon id="clearBtn" 
-                                      fontSize="large" 
-                                      onClick= {clearInput}/>}
+                        <CloseIcon onClick= {clearInput}/>
+                    </div> : null}
+                
+                <hr className="hr2"/>  
+                    <div className="searchIcon" >
+                      <SearchIcon fontSize="large" onClick= {()=> {handleSearch(searchWord)}}/>
                     </div>
                 </div>
                 {open && (
@@ -87,7 +89,7 @@ const SearchBar = ({placeholder, getPokemon}) => {
                     {newFilter.slice(0,15).map(item => ( 
                         <div className= "optionList"
                              key={item.name}
-                             onClick= {() => {onSearch(item.name)}}>
+                             onClick= {() => {handleSearch(item.name)}}>
                             <p>{item.name}</p>
                         </div>  
                       ))                   
@@ -100,32 +102,4 @@ const SearchBar = ({placeholder, getPokemon}) => {
 }
 
 export default SearchBar;      
-                                 
-                                            
-                                            
-                                             
-                              
-    
-  
-
-             
-    
-    
-    
-    
-    
-
-       
-
-
-
-
-
-
-
-             
-                    
-                          
-                 
-// {`dropdown ${open ? "open" : null}`}    
-// searchWord !== ""
+                

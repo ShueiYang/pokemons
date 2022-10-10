@@ -83,15 +83,18 @@ function App() {
     try{
   // fetchPokemon is an function import from the outside
       const response = await fetchPokemon(keyword.toLowerCase());
-      const results = await response.json();
-      setSearchUrl(results)
-      setSearchLoading(false)
-            
+        if(response.ok) {
+          const results = await response.json();
+          setSearchUrl(results)
+        } else if (response.status === 404) {
+          setErrorSearch(`Pokemon not found ...`)
+          setSearchUrl(null)
+        }
       } catch (err) {
-        console.log(err)
-        setSearchLoading(false)
-        setErrorSearch(`Pokemon not found ...`)
+        setErrorSearch(`Oups...${err.message}`)
         setSearchUrl(null)
+      } finally {
+        setSearchLoading(false)
       }
     },500);
   }

@@ -44,6 +44,6 @@
     width: 70%;
   }
 
-  hr:not(.hr1) {
+  hr:not(.hr1, .hr2) {
     margin: 15px 0px;
   }

@@ -8,6 +8,7 @@
 .search-container {
   display: flex;
   flex-direction: column;
+  width: 300px;
 }
 
 .searchInputs {
@@ -23,23 +24,20 @@ input {
   font-size: 18px;
   padding: 15px;
   height: 30px;
-  width: 250px;
+  width: 100%;
 }
 
 .searchIcon {
   height: 60px;
-  width: 50px;
+  width: 30%;
   background-color: white;
   display: grid;
   place-items: center;
+  cursor: pointer;
 }
 
 input:focus {
   outline: none;
-}
-
-.seartchIcon svg {
-  font-size: 35px;
 }
 
 .dropdown {
@@ -73,6 +71,7 @@ input:focus {
   background-color: lightgrey;
 }
 
-#clearBtn {
-  cursor: pointer;
+.hr2 {
+  border-color: #dadce0;
+  margin: 0;
 }
