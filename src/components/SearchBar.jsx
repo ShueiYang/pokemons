@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./SearchBar.css"
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import { Tooltip } from "@mui/material";
 import { fetchData } from "../services/SearchPokemon";
 import useClickOutside from "../services/UseClickOutside";
 
@@ -81,7 +82,9 @@ const SearchBar = ({placeholder, getPokemon}) => {
                 
                 <hr className="hr2"/>  
                     <div className="searchIcon" >
-                      <SearchIcon fontSize="large" onClick= {()=> {handleSearch(searchWord)}}/>
+                        <Tooltip title="Search">
+                          <SearchIcon fontSize="large" onClick= {()=> {handleSearch(searchWord)}}/>  
+                        </Tooltip>
                     </div>
                 </div>
                 {open && (
@@ -101,5 +104,6 @@ const SearchBar = ({placeholder, getPokemon}) => {
     );
 }
 
-export default SearchBar;      
+export default SearchBar; 
+                         
                 
