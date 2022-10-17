@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./SearchBar.css"
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
-import { Tooltip } from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
 import { fetchData } from "../services/SearchPokemon";
 import useClickOutside from "../services/UseClickOutside";
 
