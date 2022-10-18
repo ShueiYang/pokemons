@@ -123,25 +123,26 @@ function App() {
   
 if (loading)
   return (
-    <Header message={`Loading ... A moment plz ...`} />
+      <Header message={`Loading ... A moment plz ...`} />
   )    
        
 else if (error) 
   return (
-    <Header message={`Ooooops something went wrong :(  ${error}`} />
+      <Header message={`Ooooops something went wrong :(  ${error}`} />
   )
   
   return (
-    <div> 
+    <> 
       <Header />
+      
       <div>
         <SearchBar placeholder="Search by name..."
-                   getPokemon= {searchPokemon}/>
-          {searchLoading ? 
-            <div className="logo">
-              <h1 className="loadfont"> {`Searching ...`}</h1>
-              <CircularProgress sx={{color: '#ffcc03'}}/>
-            </div> : null}
+                    getPokemon= {searchPokemon}/>
+        {searchLoading ? 
+          <div className="logo">
+            <h1 className="loadfont"> {`Searching ...`}</h1>
+            <CircularProgress sx={{color: '#ffcc03'}}/>
+          </div> : null}
       </div>
       
       <Pagination
@@ -156,32 +157,25 @@ else if (error)
           <Pokeinfo data={pokeDex} />
         </div>
         
-       {errorSearch ? ( 
-            <div className="logo">
-              <h1 className="loadfont">{errorSearch}</h1> 
-              <button onClick={gotoMainPage}>Return to Pokedex</button>
-            </div>
-          ) :  
-        <div className="right-content">
-          <PokemonList pokedata={pokemons} 
-                       loading={searchLoading} 
-                       infoPokemon={info => setPokeDex(info)} 
-                       searchPokemon={searchUrl}
-                       mainPage={gotoMainPage}
-                      />                    
-        </div> }
+        {errorSearch ?  
+          <div className="logo">
+            <h1 className="loadfont">{errorSearch}</h1> 
+            <button onClick={gotoMainPage}>Return to Pokedex</button>
+          </div>
+        : <div className="right-content">
+            <PokemonList pokedata={pokemons} 
+                          loading={searchLoading} 
+                          infoPokemon={info => setPokeDex(info)} 
+                          searchPokemon={searchUrl}
+                          mainPage={gotoMainPage}
+                        />                    
+          </div> } 
       </div>
+      
       <Footer />  
-    </div>
+    </>
   );
 }
 
-export default App;   
-        
-        
-
-      
-
-
-
+export default App; 
 
