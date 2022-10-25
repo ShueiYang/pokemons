@@ -20,7 +20,7 @@ const Footer = () => {
                 </div>
             <hr/>
                 <div className="git">
-                    <LinkedInIcon/><a href="#!" rel="noreferrer"
+                    <LinkedInIcon/><a href="https://www.linkedin.com/in/shueiyang" rel="noreferrer"
                     target="_blank" className="cool-link">LinkedIn</a>
                 </div>
             </div>
