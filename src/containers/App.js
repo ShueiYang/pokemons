@@ -25,7 +25,7 @@ function App() {
     const controller = new AbortController();
     const { signal } = controller;
     const getAllPokemons = async () => {
-        setSearchLoading(true)
+      setSearchLoading(true)
       try {
         const response = await fetch(currentPageUrl, {signal})
         if(!response.ok) {
@@ -38,33 +38,33 @@ function App() {
         setPrevPageUrl(data.previous)
         setNextPageUrl(data.next)
         
-        const getPokemon = await Promise.all(
+        const getPokemonData = await Promise.all(
           data.results.map(async (pokemon) => {
-            const resp = await fetch(pokemon.url);
-            return resp.json()
+            const response = await fetch(pokemon.url, {signal})
+            return response.json();
           })
-        )
-        setPokemons(state => [...state, ...getPokemon])
+        );
+        setPokemons([...getPokemonData])
         setError(null)
         setSearchLoading(false)
-
-        return () => {
-          controller.abort();
-        }
-
+      
       } catch (err) {
         if (err.name === 'AbortError') {
-          return console.log('Request abort');
+          console.log('Request cancelled!');
+        } else {
+          setError(err.message)
+          setPokemons([]); 
         }
-        setError(err.message)
-        setPokemons(null)
-      
       } finally {
         setLoading(false)
       }
-    }
+    };
     getAllPokemons();
-  }, [currentPageUrl])
+
+    return () => {
+      controller.abort();
+    }
+  }, [currentPageUrl]);
    
   //When the function below receive the parameter keyword information from the SearchBar component 
   //it will "react" and search the pokemon.
@@ -97,7 +97,7 @@ function App() {
         setSearchLoading(false)
       }
     },500);
-  }
+  };
   
   //The function below are set to display different pages as only 25 pokemons 
   //is displayed at the same time on each page.
@@ -106,20 +106,19 @@ function App() {
     setSearchUrl(null)
     setErrorSearch(null)
   }
-
+  
   function gotoNextPage() {
     setPokemons([])
     setErrorSearch(null)
   //fix a bug on the last page where the limit is changed so the previous page from the last page display incorrect limit
     setCurrentPageUrl(nextPageUrl.replace(/limit.*$/, "limit=25"))
   }                                      
-
+  
   function gotoPrevPage() {
     setPokemons([])
     setErrorSearch(null)
     setCurrentPageUrl(prevPageUrl)
   }
-  
   
 if (loading)
   return (
@@ -138,20 +137,19 @@ else if (error)
       <div>
         <SearchBar placeholder="Search by name..."
                     getPokemon= {searchPokemon}/>
-        {searchLoading ? 
-          <div className="logo">
-            <h1 className="loadfont"> {`Searching ...`}</h1>
-            <CircularProgress sx={{color: '#ffcc03'}}/>
-          </div> : null}
-      </div>
-      
+        
       <Pagination
-        gotoNextPage={nextPageUrl && !searchLoading &&
-          !searchUrl && !errorSearch ? gotoNextPage : null}
-        gotoPrevPage={prevPageUrl && !searchLoading &&
-          !searchUrl && !errorSearch ? gotoPrevPage : null}
-      />    
-      
+        gotoNextPage={nextPageUrl && !searchUrl && !errorSearch ? gotoNextPage : null}
+        gotoPrevPage={prevPageUrl && !searchUrl && !errorSearch ? gotoPrevPage : null}
+      />
+         
+      {searchLoading ? 
+        <div className="logo">
+          <h1 className="loadfont"> {`Searching ...`}</h1>
+          <CircularProgress sx={{color: '#ffcc03'}}/>
+        </div> : null}
+      </div>  
+        
       <div className="container">
         <div className="left-content">
           <Pokeinfo data={pokeDex} />
@@ -177,5 +175,5 @@ else if (error)
   );
 }
 
-export default App; 
-
+export default App;     
+      

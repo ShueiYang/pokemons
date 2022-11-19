@@ -1,6 +1,6 @@
 import React from "react";
 
-const Pagination = ({ gotoNextPage, gotoPrevPage}) => {
+const Pagination = ({ gotoNextPage, gotoPrevPage }) => {
     return (
         <div className="btn-group">
             {gotoPrevPage && <button onClick= {gotoPrevPage}>Previous</button>}
@@ -8,5 +8,4 @@ const Pagination = ({ gotoNextPage, gotoPrevPage}) => {
         </div>
     )
 }
-
 export default Pagination;
