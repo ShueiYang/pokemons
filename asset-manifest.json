@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/pokemons/static/css/main.17255425.css",
-    "main.js": "/pokemons/static/js/main.c6591403.js",
+    "main.js": "/pokemons/static/js/main.931a328f.js",
     "static/js/787.86f9dd6d.chunk.js": "/pokemons/static/js/787.86f9dd6d.chunk.js",
     "static/media/pokemon-logo.png": "/pokemons/static/media/pokemon-logo.b7e348e6baec8194d0bb.png",
     "static/media/Pokemon Hollow.ttf": "/pokemons/static/media/Pokemon Hollow.47f77ce9939c5330492b.ttf",
     "index.html": "/pokemons/index.html",
     "main.17255425.css.map": "/pokemons/static/css/main.17255425.css.map",
-    "main.c6591403.js.map": "/pokemons/static/js/main.c6591403.js.map",
+    "main.931a328f.js.map": "/pokemons/static/js/main.931a328f.js.map",
     "787.86f9dd6d.chunk.js.map": "/pokemons/static/js/787.86f9dd6d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.17255425.css",
-    "static/js/main.c6591403.js"
+    "static/js/main.931a328f.js"
   ]
 }
