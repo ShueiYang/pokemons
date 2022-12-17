@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import PokemonList from "../components/PokemonList";
-import Pokeinfo from "../components/Pokeinfo";
-import Pagination from "../components/Pagination";
-import SearchBar from "../components/SearchBar";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import Header from "../components/Header";
+import SearchBar from "../components/SearchBar";
+import Pagination from "../components/Pagination";
+import SearchProgress from "../components/SearchProgress";
+import PokemonList from "../components/PokemonList";
+import Homebutton from "../components/Homebutton";
 import Footer from "../components/Footer";
-import CircularProgress from '@mui/material/CircularProgress';
 import "./App.css"
 import { fetchPokemon } from "../services/SearchPokemon";
 
+const Pokeinfo = lazy(()=> import("../components/Pokeinfo"));
 
 
 function App() {
@@ -17,15 +18,15 @@ function App() {
   const [prevPageUrl, setPrevPageUrl] = useState()
   const [nextPageUrl, setNextPageUrl] = useState()
   const [loading, setLoading] = useState(true)
-  const [pokeDex, setPokeDex] = useState()
-  const [searchLoading, setSearchLoading] = useState(false)
+  const [pokeDex, setPokeDex] = useState(null)
+  const [isPending, setPending] = useState(false)
   const [error, setError ] = useState(null)
 
   useEffect(() => {
     const controller = new AbortController();
     const { signal } = controller;
     const getAllPokemons = async () => {
-      setSearchLoading(true)
+      setPending(true)
       try {
         const response = await fetch(currentPageUrl, {signal})
         if(!response.ok) {
@@ -46,7 +47,7 @@ function App() {
         );
         setPokemons([...getPokemonData])
         setError(null)
-        setSearchLoading(false)
+        setPending(false)
       
       } catch (err) {
         if (err.name === 'AbortError') {
@@ -77,7 +78,7 @@ function App() {
       setSearchUrl(null)
       return setErrorSearch(null);
     };
-      setSearchLoading(true)
+      setPending(true)
       setErrorSearch(null)
   setTimeout ( async () => {
     try{
@@ -94,7 +95,7 @@ function App() {
         setErrorSearch(`Oups...${err.message}`)
         setSearchUrl(null)
       } finally {
-        setSearchLoading(false)
+        setPending(false)
       }
     },500);
   };
@@ -105,75 +106,65 @@ function App() {
   function gotoMainPage() {
     setSearchUrl(null)
     setErrorSearch(null)
-  }
+  };
   
   function gotoNextPage() {
     setPokemons([])
     setErrorSearch(null)
   //fix a bug on the last page where the limit is changed so the previous page from the last page display incorrect limit
     setCurrentPageUrl(nextPageUrl.replace(/limit.*$/, "limit=25"))
-  }                                      
+  };                                     
   
   function gotoPrevPage() {
     setPokemons([])
     setErrorSearch(null)
     setCurrentPageUrl(prevPageUrl)
-  }
+  };
+
   
 if (loading)
-  return (
-      <Header message={`Loading ... A moment plz ...`} />
-  )    
-       
+  return <Header message={`Loading ... A moment plz...`}/>
 else if (error) 
-  return (
-      <Header message={`Ooooops something went wrong :(  ${error}`} />
-  )
-  
+  return <Header message={`Ooooops something went wrong :(  ${error}`}/>
+    
   return (
     <> 
       <Header />
-      
-      <div>
-        <SearchBar placeholder="Search by name..."
-                    getPokemon= {searchPokemon}/>
+      <SearchBar 
+        placeholder="Search by name..."
+        getPokemon= {searchPokemon}/>
         
       <Pagination
-        gotoNextPage={nextPageUrl && !searchUrl && !errorSearch ? gotoNextPage : null}
-        gotoPrevPage={prevPageUrl && !searchUrl && !errorSearch ? gotoPrevPage : null}
-      />
+        gotoNextPage={nextPageUrl && !searchUrl && 
+          !errorSearch ? gotoNextPage : null}
+        gotoPrevPage={prevPageUrl && !searchUrl && 
+          !errorSearch ? gotoPrevPage : null}/>
          
-      {searchLoading ? 
-        <div className="logo">
-          <h1 className="loadfont"> {`Searching ...`}</h1>
-          <CircularProgress sx={{color: '#ffcc03'}}/>
-        </div> : null}
-      </div>  
-        
+    {isPending &&
+      <SearchProgress />
+    }
       <div className="container">
-        <div className="left-content">
-          <Pokeinfo data={pokeDex} />
-        </div>
+        <Suspense fallback={<SearchProgress/>}>
+        {pokeDex ? <Pokeinfo data={pokeDex}/> :
+          <h1 className="loading">
+            {"Click on the card to\nget more information\non Pokemon\nskills and Stats"}
+          </h1>}
+        </Suspense>
         
-        {errorSearch ?  
-          <div className="logo">
-            <h1 className="loadfont">{errorSearch}</h1> 
-            <button onClick={gotoMainPage}>Return to Pokedex</button>
-          </div>
-        : <div className="right-content">
-            <PokemonList pokedata={pokemons} 
-                          loading={searchLoading} 
-                          infoPokemon={info => setPokeDex(info)} 
-                          searchPokemon={searchUrl}
-                          mainPage={gotoMainPage}
-                        />                    
-          </div> } 
+      {errorSearch ?  
+        <Homebutton error={errorSearch} gotoMainPage={gotoMainPage}/>
+      : <PokemonList pokedata={pokemons} 
+                    loading={isPending} 
+                    infoPokemon={info => setPokeDex(info)} 
+                    searchPokemon={searchUrl}
+                    mainPage={gotoMainPage}
+                  /> 
+      } 
       </div>
-      
       <Footer />  
     </>
   );
 }
 
-export default App;     
+export default App;  
       

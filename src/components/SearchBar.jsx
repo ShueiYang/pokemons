@@ -3,7 +3,6 @@ import "./SearchBar.css"
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Tooltip from "@mui/material/Tooltip";
-import { fetchData } from "../services/SearchPokemon";
 import useClickOutside from "../services/UseClickOutside";
 
 
@@ -14,21 +13,19 @@ const SearchBar = ({placeholder, getPokemon}) => {
     const [open, setOpen]= useState(false);
     const domNode = useRef() 
     
-  // this function fetch the data from the entire list of pokemon's name once, 
+  // use Dynamic import to import the function and fetch only once if someone use the searchbar, 
   // in order to display on the SearchBar as name suggesion.
-
-    useEffect(() => { 
-        const getData = async () => {
-            try{
-                const resp = await fetchData()
-                const data = await resp.json()
-                setDataName(data.results)
-            } catch (err) {
-                console.log(err)
+      
+    useEffect(() => {     
+        if (open && dataName.length === 0) {
+            const getData = async () => {
+                const { fetchData } = await import('../services/SearchPokemon');
+                const data = await fetchData();
+                setDataName(data.results) 
             }
+            getData();
         }
-        getData();
-    }, [])
+    }, [open, dataName.length]);
             
        
     const handleChange = event => {
@@ -72,7 +69,7 @@ const SearchBar = ({placeholder, getPokemon}) => {
                         placeholder= {placeholder}
                         value = {searchWord}
                         onChange= {handleChange}
-                        onKeyPress={handleKeypress}
+                        onKeyDown={handleKeypress}
                     />
                 
                 {searchWord.length !== 0 ?
