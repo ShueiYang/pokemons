@@ -11,16 +11,17 @@ import { fetchPokemon } from "../services/SearchPokemon";
 
 const Pokeinfo = lazy(()=> import("../components/Pokeinfo"));
 
+const POKEMON_API_URL = "https://pokeapi.co/api/v2/pokemon?limit=25";
 
 function App() {
-  const [pokemons, setPokemons] = useState([])
-  const [currentPageUrl, setCurrentPageUrl] = useState("https://pokeapi.co/api/v2/pokemon?limit=25")
-  const [prevPageUrl, setPrevPageUrl] = useState()
-  const [nextPageUrl, setNextPageUrl] = useState()
-  const [loading, setLoading] = useState(true)
-  const [pokeDex, setPokeDex] = useState(null)
-  const [isPending, setPending] = useState(false)
-  const [error, setError ] = useState(null)
+  const [pokemons, setPokemons] = useState([]);
+  const [currentPageUrl, setCurrentPageUrl] = useState(POKEMON_API_URL);
+  const [prevPageUrl, setPrevPageUrl] = useState();
+  const [nextPageUrl, setNextPageUrl] = useState();
+  const [loading, setLoading] = useState(true);
+  const [pokeDex, setPokeDex] = useState(null);
+  const [isPending, setPending] = useState(false);
+  const [error, setError ] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -100,21 +101,24 @@ function App() {
     },500);
   };
   
-  //The function below are set to display different pages as only 25 pokemons 
-  //is displayed at the same time on each page.
-  
+
   function gotoMainPage() {
     setSearchUrl(null)
     setErrorSearch(null)
+  };
+
+// create a function to fix a bug on the last page where the pagination limit has been modified
+// so the previous page from the last page display incorrect limit.
+  function paginationLimit(url) {
+    const result = url.match(/25$/)
+    return !result ? url.replace(/limit.*$/, "limit=25") : url;
   };
   
   function gotoNextPage() {
     setPokemons([])
     setErrorSearch(null)
-  //fix a bug on the last page where the limit is changed so the previous page from the last page display incorrect limit
-    setCurrentPageUrl(nextPageUrl.replace(/limit.*$/, "limit=25"))
+    setCurrentPageUrl(paginationLimit(nextPageUrl))
   };                                     
-  
   function gotoPrevPage() {
     setPokemons([])
     setErrorSearch(null)
