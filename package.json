@@ -1,7 +1,7 @@
 {
   "name": "pokemons",
   "homepage": "https://ShueiYang.github.io/pokemons",
-  "version": "0.1.2",
+  "version": "1.0.2",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -44,6 +44,6 @@
     ]
   },
   "overrides": {
-    "nth-check@1.0.2": "2.0.1"
+    "nth-check@1.0.2": "2.1.1"
   }
 }
