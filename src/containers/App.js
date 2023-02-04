@@ -144,15 +144,16 @@ else if (error)
         gotoPrevPage={prevPageUrl && !searchUrl && 
           !errorSearch ? gotoPrevPage : null}/>
          
-    {isPending &&
-      <SearchProgress />
-    }
+      {isPending &&
+        <SearchProgress />
+      }
       <div className="container">
         <Suspense fallback={<SearchProgress/>}>
         {pokeDex ? <Pokeinfo data={pokeDex}/> :
           <h1 className="loading">
             {"Click on the card to\nget more information\non Pokemon\nskills and Stats"}
-          </h1>}
+          </h1>
+        }
         </Suspense>
         
       {errorSearch ?  
@@ -170,5 +171,4 @@ else if (error)
   );
 }
 
-export default App;  
-      
+export default App;
