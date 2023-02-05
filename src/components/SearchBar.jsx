@@ -15,7 +15,6 @@ const SearchBar = ({placeholder, getPokemon}) => {
     
   // use Dynamic import to import the function and fetch only once if someone use the searchbar, 
   // in order to display on the SearchBar as name suggesion.
-      
     useEffect(() => {     
         if (open && dataName.length === 0) {
             const getData = async () => {
@@ -28,32 +27,27 @@ const SearchBar = ({placeholder, getPokemon}) => {
     }, [open, dataName.length]);
             
        
-    const handleChange = event => {
-        setSearchWord(event.target.value)
-        setOpen(true) 
-    }
+    function handleChange(event) {
+        setSearchWord(event.target.value);
+        setOpen(true);
+    };
 
-    const handleKeypress = event => {
-        if(event.key === 'Enter') {
-            getPokemon(searchWord)
+    function handleKeypress(event) {
+        if (event.key === 'Enter') {
+            getPokemon(searchWord);
             setOpen(false);
         }
-    }
-    
-    const handleSearch = dropdownListName => {
-        setSearchWord(dropdownListName)
-        getPokemon(dropdownListName)
-        setOpen(false)
-    }
-
-    const clearInput = () => {
-        setSearchWord("")
-    }  
-    
+    };
+    function handleSearch(dropdownListName) {
+        setSearchWord(dropdownListName);
+        getPokemon(dropdownListName);
+        setOpen(false);
+    };
+       
     //the function is import from outside
     useClickOutside(domNode, ()=> setOpen(false));
       
-    
+
     const newFilter = dataName.filter(item => {
         const searchTerm = searchWord.toLowerCase()
         const fullName = item.name.toLowerCase()
@@ -71,10 +65,9 @@ const SearchBar = ({placeholder, getPokemon}) => {
                         onChange= {handleChange}
                         onKeyDown={handleKeypress}
                     />
-                
                 {searchWord.length !== 0 ?
                     <div className="searchIcon" >
-                        <CloseIcon onClick= {clearInput}/>
+                        <CloseIcon onClick= {()=> {setSearchWord("")}}/>
                     </div> : null}
                 
                 <hr className="hr2"/>  
@@ -84,23 +77,20 @@ const SearchBar = ({placeholder, getPokemon}) => {
                         </Tooltip>
                     </div>
                 </div>
-                {open && (
-                <div className= "dropdown"  >
-                    {newFilter.slice(0,15).map(item => ( 
-                        <div className= "optionList"
-                             key={item.name}
-                             onClick= {() => {handleSearch(item.name)}}>
-                            <p>{item.name}</p>
-                        </div>  
-                      ))                   
-                    }
-                </div>
-                )}      
+                {open && 
+                    <div className= "dropdown"  >
+                        {newFilter.slice(0,15).map(item => ( 
+                            <div className= "optionList"
+                                key={item.name}
+                                onClick= {() => {handleSearch(item.name)}}>
+                                <p>{item.name}</p>
+                            </div>  
+                        ))}
+                    </div>
+                }      
             </div>
         </div> 
     );
 }
 
-export default SearchBar; 
-                         
-                
+export default SearchBar;                             
