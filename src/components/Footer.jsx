@@ -15,7 +15,7 @@ const Footer = () => {
                 </p>
             <hr/>
                 <div className="git">
-                    <GitHubIcon/><a href="https://github.com/ShueiYang" rel="noreferrer"
+                    <GitHubIcon/><a href="https://github.com/ShueiYang/pokemons" rel="noreferrer"
                     target="_blank" className="cool-link">GitHub</a>
                 </div>
             <hr/>
