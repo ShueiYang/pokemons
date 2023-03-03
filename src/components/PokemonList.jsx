@@ -26,7 +26,7 @@ const PokemonList = ({pokedata, loading, infoPokemon, searchPokemon, mainPage}) 
         { (!loading && !searchPokemon) &&
             pokedata.map(pokemon =>{
                 return (
-                    <div key={pokemon.id} onClick= {()=> infoPokemon(pokemon)}>
+                    <div className="gridPokemon" key={pokemon.id} onClick= {()=> infoPokemon(pokemon)}>
                         <Card
                         id={pokemon.id} 
                         name={pokemon.name} 
@@ -35,7 +35,7 @@ const PokemonList = ({pokedata, loading, infoPokemon, searchPokemon, mainPage}) 
                         type={pokemon.types[0].type.name} 
                         type2={pokemon.types[1] ? pokemon.types[1].type.name : null}     
                         /> 
-                    </div>   
+                    </div>
                 )   
             })
         }   

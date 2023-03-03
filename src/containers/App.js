@@ -151,7 +151,7 @@ else if (error)
         <Suspense fallback={<SearchProgress/>}>
         {pokeDex ? <Pokeinfo data={pokeDex}/> :
           <h1 className="loading">
-            {"Click on the card to\nget more information\non Pokemon\nskills and Stats"}
+            {"Click on the card to get more information on Pokemon skills and Stats"}
           </h1>
         }
         </Suspense>

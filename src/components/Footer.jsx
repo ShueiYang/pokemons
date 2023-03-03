@@ -9,24 +9,24 @@ const Footer = () => {
      return (
         <div>
             <hr className="hr1"/>
-            <div className="footer">  
-                <p> 
-                    &copy;{new Date().getFullYear()} Developed by ShueiYang   
-                </p>
-            <hr/>
-                <div className="git">
-                    <GitHubIcon/><a href="https://github.com/ShueiYang/pokemons" rel="noreferrer"
-                    target="_blank" className="cool-link">GitHub</a>
+            <div className="footer"> 
+                <div> 
+                    <p>&copy;{new Date().getFullYear()} Developed by ShueiYang</p>
                 </div>
-            <hr/>
-                <div className="git">
-                    <LinkedInIcon/><a href="https://www.linkedin.com/in/shueiyang" rel="noreferrer"
-                    target="_blank" className="cool-link">LinkedIn</a>
+                <div className="socialIcon">
+                    <div className="git">
+                        <GitHubIcon/><a href="https://github.com/ShueiYang/pokemons" rel="noreferrer"
+                        target="_blank" className="cool-link">GitHub</a>
+                    </div>
+                <hr/>
+                    <div className="git">
+                        <LinkedInIcon/><a href="https://www.linkedin.com/in/shueiyang" rel="noreferrer"
+                        target="_blank" className="cool-link">LinkedIn</a>
+                    </div>
                 </div>
             </div>
         </div>    
      ) 
  }
  
- export default Footer; 
-        
+ export default Footer;
