@@ -11,7 +11,7 @@ body {
   align-items: center;
 }
 .logo img {
-  max-width: 60vw;
+  width: min(60vw, 800px);
   height: auto;
 }
 
