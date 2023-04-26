@@ -1,7 +1,7 @@
 {
   "name": "pokemons",
   "homepage": "https://ShueiYang.github.io/pokemons",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "type": "module",
 
@@ -11,7 +11,7 @@
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.9.3",
