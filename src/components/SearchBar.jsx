@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./SearchBar.css"
+import "./styles/SearchBar.css"
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
 import Tooltip from "@mui/material/Tooltip";
 import useClickOutside from "../services/UseClickOutside";
 
 
-const SearchBar = ({placeholder, getPokemon}) => {
+const SearchBar = ({getPokemon}) => {
 
     const [dataName, setDataName] = useState([]);
     const [searchWord, setSearchWord] = useState("");
@@ -60,7 +60,7 @@ const SearchBar = ({placeholder, getPokemon}) => {
                 <div className="searchInputs">
                     <input 
                         type="text"
-                        placeholder= {placeholder}
+                        placeholder="Search by name..."
                         value = {searchWord}
                         onChange= {handleChange}
                         onKeyDown={handleKeypress}
