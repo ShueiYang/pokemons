@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./Card";
+import Card from "./items/Card";
 
 const PokemonList = ({pokedata, loading, infoPokemon, searchPokemon, mainPage}) => {
     

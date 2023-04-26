@@ -1,5 +1,5 @@
 import React from "react";
-import Mainlogo from "../containers/pokemon-logo.png"
+import Mainlogo from "../assets/pokemon-logo.png"
 
 const Header = ({message}) => {
     
